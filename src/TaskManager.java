@@ -8,8 +8,9 @@ public class TaskManager {
     private int nextId = 1;
 
     // TASK
-    public HashMap<Integer, Task> getTasks(){
-        return tasks;
+    public ArrayList<Task> getTasks(){
+        ArrayList<Task> allTasks = new ArrayList<>(tasks.values());
+        return allTasks;
     }
 
     public void deleteTasks(){
@@ -34,8 +35,9 @@ public class TaskManager {
     }
 
     // EPIC
-    public HashMap<Integer, Epic> getEpics(){
-        return epics;
+    public ArrayList<Epic> getEpics(){
+        ArrayList<Epic> allEpics = new ArrayList<>(epics.values());
+        return allEpics;
     }
 
     public void deleteEpics(){
@@ -67,13 +69,13 @@ public class TaskManager {
                 subtasks.remove(subtaskId);
             }
             epics.remove(id);
-            epic.getSubtasksIds().clear();
         }
     }
 
     //SUBTASK
-    public HashMap<Integer, Subtask> getSubtasks(){
-        return subtasks;
+    public ArrayList<Subtask> getSubtasks(){
+        ArrayList<Subtask> allSubtasks = new ArrayList<>(subtasks.values());
+        return allSubtasks;
     }
 
     public void deleteSubtasks(){
