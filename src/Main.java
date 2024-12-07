@@ -1,9 +1,7 @@
-public class Main {
-
     public static void main(String[] args) {
         System.out.println("Поехали!");
 
-        TaskManager manager = new TaskManager();
+        TaskManager manager = Managers.getDefault();
 
         Task task1 = new Task("Задача №1", "Поспать", Status.IN_PROGRESS);
         manager.addTask(task1);
@@ -48,6 +46,11 @@ public class Main {
         System.out.println(manager.getTasks());
         System.out.println(manager.getEpics());
         System.out.println(manager.getSubtasks());
+
+        System.out.println(manager.getTaskById(2));
+        System.out.println(manager.getEpicById(3));
+        System.out.println(manager.getSubtaskById(4));
+
+        System.out.println(manager.getHistory());
     }
 
-}
