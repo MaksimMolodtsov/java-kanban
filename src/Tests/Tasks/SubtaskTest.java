@@ -1,3 +1,8 @@
+package Tests.Tasks;
+
+import Statuses.Status;
+import Tasks.Epic;
+import Tasks.Subtask;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
