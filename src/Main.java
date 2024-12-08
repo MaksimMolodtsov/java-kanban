@@ -1,4 +1,11 @@
-    public static void main(String[] args) {
+import Managers.Managers;
+import Statuses.Status;
+import Tasks.Epic;
+import Tasks.Subtask;
+import Tasks.Task;
+import Managers.TaskManager;
+
+public static void main(String[] args) {
         System.out.println("Поехали!");
 
         TaskManager manager = Managers.getDefault();
