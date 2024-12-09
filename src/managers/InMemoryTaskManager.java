@@ -1,9 +1,9 @@
-package Managers;
+package managers;
 
-import Statuses.Status;
-import Tasks.Epic;
-import Tasks.Subtask;
-import Tasks.Task;
+import statuses.Status;
+import tasks.Epic;
+import tasks.Subtask;
+import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,9 +47,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Object deleteTaskById(int id) {
+    public void deleteTaskById(int id) {
         tasks.remove(id);
-        return null;
     }
 
     // EPIC
@@ -139,7 +138,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Object deleteSubtaskById(int id) {
+    public void deleteSubtaskById(int id) {
         if (subtasks.containsKey(id)) {
             Subtask subtask = subtasks.remove(id);
             Epic epic = epics.get(subtask.getEpicId());
@@ -147,7 +146,6 @@ public class InMemoryTaskManager implements TaskManager {
             epic.getSubtasksIds().remove(id);
             updateStatus(epic);
         }
-        return null;
     }
 
     @Override

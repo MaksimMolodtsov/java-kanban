@@ -1,9 +1,9 @@
-import Managers.Managers;
-import Statuses.Status;
-import Tasks.Epic;
-import Tasks.Subtask;
-import Tasks.Task;
-import Managers.TaskManager;
+import managers.Managers;
+import statuses.Status;
+import tasks.Epic;
+import tasks.Subtask;
+import tasks.Task;
+import managers.TaskManager;
 
 public static void main(String[] args) {
         System.out.println("Поехали!");

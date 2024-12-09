@@ -1,11 +1,11 @@
-package Tests.Managers;
+package tests.managers;
 
-import Managers.Managers;
-import Statuses.Status;
-import Tasks.Epic;
-import Tasks.Subtask;
-import Tasks.Task;
-import Managers.TaskManager;
+import managers.Managers;
+import statuses.Status;
+import tasks.Epic;
+import tasks.Subtask;
+import tasks.Task;
+import managers.TaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -113,30 +113,6 @@ class InMemoryTaskManagerTest {
         taskManager.deleteSubtasks();
         List<Subtask> subtasks = taskManager.getSubtasks();
         assertTrue(subtasks.isEmpty(), "После удаления подзадач список должен быть пуст.");
-    }
-
-    @Test
-    public void deleteTaskByIdShouldReturnNullIfKeyIsMissing() {
-        taskManager.addTask(new Task("Задача №1", "Описание", 2, Status.NEW));
-        taskManager.addTask(new Task("Задача №1", "Описание", 1, Status.NEW));
-        assertNull(taskManager.deleteTaskById(2));
-    }
-
-    @Test
-    public void deleteEpicByIdShouldReturnNullIfKeyIsMissing() {
-        taskManager.addEpic(new Epic("Эпик №1", "Описание", Status.IN_PROGRESS, 1));
-        taskManager.deleteEpicById(1);
-        assertNull(taskManager.deleteTaskById(1));
-    }
-
-    @Test
-    public void deleteSubtaskByIdShouldReturnNullIfKeyIsMissing() {
-        Epic epic = new Epic("Эпик №1", "Описание");
-        taskManager.addEpic(epic);
-        taskManager.addSubtask(new Subtask("Подзадача №1", "Описание", Status.NEW, epic.getId()));
-        taskManager.addSubtask(new Subtask("Подзадача №1", "Описание", Status.NEW, epic.getId()));
-        taskManager.addSubtask(new Subtask("Подзадача №1", "Описание", Status.NEW, epic.getId()));
-        assertNull(taskManager.deleteSubtaskById(5));
     }
 
     @Test

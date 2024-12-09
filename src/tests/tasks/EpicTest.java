@@ -1,7 +1,7 @@
-package Tests.Tasks;
+package tests.tasks;
 
-import Statuses.Status;
-import Tasks.Epic;
+import statuses.Status;
+import tasks.Epic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
