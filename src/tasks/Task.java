@@ -10,42 +10,42 @@ public class Task {
     private int id;
     private Status status;
 
-    public Task (String title, String description, Status status) {
+    public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
         this.status = status;
     }
 
-    public Task (String title, String description, Integer id, Status status) {
+    public Task(String title, String description, Integer id, Status status) {
         this.title = title;
         this.description = description;
         this.id = id;
         this.status = status;
     }
 
-    public String getTitle () {
+    public String getTitle() {
         return title;
     }
 
-    public String getDescription () {
+    public String getDescription() {
         return description;
     }
 
-    public int getId () {
+    public int getId() {
         return id;
     }
 
-    public void setId (int id) {
+    public void setId(int id) {
         if (id > 0) {
             this.id = id;
         }
     }
 
-    public Status getStatus () {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus (Status status){
+    public void setStatus(Status status) {
         this.status = status;
     }
 
