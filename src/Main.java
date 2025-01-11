@@ -46,9 +46,11 @@ public static void main(String[] args) {
         System.out.println(manager.getTasks());
         System.out.println(manager.getEpics());
         System.out.println(manager.getSubtasks());
+        System.out.println(manager.getSubtasksOfEpic(epic1.getId()));
 
         manager.deleteTaskById(task1.getId());
         manager.deleteEpicById(epic2.getId());
+        manager.deleteSubtaskById(subtask12.getId());
 
         System.out.println(manager.getTasks());
         System.out.println(manager.getEpics());
@@ -59,5 +61,10 @@ public static void main(String[] args) {
         System.out.println(manager.getSubtaskById(4));
 
         System.out.println(manager.getHistory());
-    }
 
+        System.out.println(manager.getTaskById(2));
+        System.out.println(manager.getEpicById(3));
+
+        System.out.println(manager.getHistory());
+
+    }

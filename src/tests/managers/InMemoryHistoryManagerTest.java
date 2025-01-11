@@ -23,18 +23,39 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    public void getHistoryShouldReturnListOf10Tasks() {
-        for (int i = 0; i < 10; i++) {
-            taskManager.addTask(new Task("Задача №1", "Поспать", Status.NEW));
+    public void getHistoryShouldReturnListOfUniqueTasksIfDeleteOneOfThem() {
+
+        for (int i = 1; i < 11; i++){
+            taskManager.addTask(new Task("Задача №" + i, "Поспать", Status.NEW));
         }
 
         List<Task> tasks = taskManager.getTasks();
-        for (Task task : tasks) {
-            taskManager.getTaskById(task.getId());
+        for (int i = 0; i < 10; i++){
+            taskManager.getTaskById(tasks.get(i).getId());
+        }
+
+        for (int i = 0; i < 6; i++){
+            taskManager.deleteTaskById(tasks.get(i).getId());
         }
 
         List<Task> list = taskManager.getHistory();
-        assertEquals(10, list.size(), "Неверное количество элементов в истории ");
+        assertEquals(4, list.size(), "Неверное количество элементов в истории ");
+    }
+
+    @Test
+    public void getHistoryShouldReturnListOfUniqueTasks() {
+
+        taskManager.addTask(new Task("Задача №1", "Поспать", Status.NEW));
+        taskManager.addTask(new Task("Задача №2", "Поспать", Status.NEW));
+
+        List<Task> tasks = taskManager.getTasks();
+        for (int i = 0; i < 10; i++){
+            taskManager.getTaskById(tasks.get(0).getId());
+            taskManager.getTaskById(tasks.get(1).getId());
+        }
+
+        List<Task> list = taskManager.getHistory();
+        assertEquals(2, list.size(), "Неверное количество элементов в истории ");
     }
 
     @Test
