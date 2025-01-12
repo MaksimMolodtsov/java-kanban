@@ -20,7 +20,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void remove (int id) {
+    public void remove(int id) {
         removeNode(nodes.get(id));
     }
 
@@ -53,7 +53,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     // ForLinkedList
 
-    public void linkLast(Task task){
+    public void linkLast(Task task) {
         final Node<Task> oldTail = tail;
         final Node<Task> newNode = new Node<>(oldTail, task, null);
         tail = newNode;
@@ -64,7 +64,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             head = newNode;
     }
 
-    public List<Task> getTasks(){
+    public List<Task> getTasks() {
         List<Task> recievedTasks = new ArrayList<>();
         Node<Task> curNode = head;
         while (curNode != null) {
