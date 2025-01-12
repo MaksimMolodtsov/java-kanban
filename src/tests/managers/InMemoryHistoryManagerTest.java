@@ -25,16 +25,16 @@ class InMemoryHistoryManagerTest {
     @Test
     public void getHistoryShouldReturnListOfUniqueTasksIfDeleteOneOfThem() {
 
-        for (int i = 1; i < 11; i++){
+        for (int i = 1; i < 11; i++) {
             taskManager.addTask(new Task("Задача №" + i, "Поспать", Status.NEW));
         }
 
         List<Task> tasks = taskManager.getTasks();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             taskManager.getTaskById(tasks.get(i).getId());
         }
 
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             taskManager.deleteTaskById(tasks.get(i).getId());
         }
 
@@ -49,7 +49,7 @@ class InMemoryHistoryManagerTest {
         taskManager.addTask(new Task("Задача №2", "Поспать", Status.NEW));
 
         List<Task> tasks = taskManager.getTasks();
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             taskManager.getTaskById(tasks.get(0).getId());
             taskManager.getTaskById(tasks.get(1).getId());
         }
