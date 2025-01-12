@@ -6,8 +6,8 @@ import tasks.Subtask;
 import tasks.Task;
 
 public class Main {
+    public static void main(String[] ignoredArgs) {
 
-    public static void main(String[] args) {
 
         TaskManager manager = Managers.getDefault();
 
