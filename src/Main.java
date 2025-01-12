@@ -5,10 +5,9 @@ import tasks.Subtask;
 import tasks.Task;
 import managers.TaskManager;
 
-public static void main(String[] args) {
-        System.out.println("Поехали!");
+public static void main(String[] ignoredArgs) {
 
-        TaskManager manager = Managers.getDefault();
+    TaskManager manager = Managers.getDefault();
 
         Task task1 = new Task("Задача №1", "Поспать", Status.IN_PROGRESS);
         manager.addTask(task1);
