@@ -8,9 +8,9 @@ import tasks.Task;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    final private Map<Integer, Task> tasks = new HashMap<>();
-    final private Map<Integer, Epic> epics = new HashMap<>();
-    final private Map<Integer, Subtask> subtasks = new HashMap<>();
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, Epic> epics = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected HistoryManager historyManager = Managers.getDefaultHistory();
     private int nextId = 1;
 
@@ -163,7 +163,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     //
-    private void updateStatus (Epic epic){
+    private void updateStatus(Epic epic) {
         boolean isNew = true;
         boolean isDone = true;
         if (epic.getSubtasksIds().isEmpty()) {
