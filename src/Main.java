@@ -66,5 +66,4 @@ public static void main(String[] args) {
         System.out.println(manager.getEpicById(3));
 
         System.out.println(manager.getHistory());
-
     }
