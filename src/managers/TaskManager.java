@@ -45,11 +45,10 @@ public interface TaskManager {
 
     void updateSubtask(Subtask subtask);
 
-    void deleteSubtaskById(int id);
+    void deleteSubtaskById(Integer id);
 
     List<Subtask> getSubtasksOfEpic(int id);
 
     //
     List<Task> getHistory();
-
 }

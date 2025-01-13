@@ -5,7 +5,9 @@ import tasks.Subtask;
 import tasks.Task;
 import managers.TaskManager;
 
-public static void main(String[] args) {
+public class Main {
+
+    public static void main(String[] args) {
         System.out.println("Поехали!");
 
         TaskManager manager = Managers.getDefault();
@@ -60,4 +62,4 @@ public static void main(String[] args) {
 
         System.out.println(manager.getHistory());
     }
-
+}

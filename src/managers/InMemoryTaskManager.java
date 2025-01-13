@@ -5,14 +5,12 @@ import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    final private Map<Integer, Task> tasks = new HashMap<>();
-    final private Map<Integer, Epic> epics = new HashMap<>();
-    final private Map<Integer, Subtask> subtasks = new HashMap<>();
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, Epic> epics = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected HistoryManager historyManager = Managers.getDefaultHistory();
     private int nextId = 1;
 
@@ -49,6 +47,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteTaskById(int id) {
         tasks.remove(id);
+        historyManager.remove(id);
     }
 
     // EPIC
@@ -92,8 +91,10 @@ public class InMemoryTaskManager implements TaskManager {
             Epic epic = epics.get(id);
             for (Integer subtaskId : epic.getSubtasksIds()) {
                 subtasks.remove(subtaskId);
+                historyManager.remove(subtaskId);
             }
             epics.remove(id);
+            historyManager.remove(id);
         }
     }
 
@@ -138,13 +139,13 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteSubtaskById(int id) {
+    public void deleteSubtaskById(Integer id) {
         if (subtasks.containsKey(id)) {
             Subtask subtask = subtasks.remove(id);
             Epic epic = epics.get(subtask.getEpicId());
-            subtasks.remove(id);
             epic.getSubtasksIds().remove(id);
             updateStatus(epic);
+            historyManager.remove(id);
         }
     }
 
@@ -162,7 +163,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     //
-    private void updateStatus (Epic epic){
+    private void updateStatus(Epic epic) {
         boolean isNew = true;
         boolean isDone = true;
         if (epic.getSubtasksIds().isEmpty()) {
