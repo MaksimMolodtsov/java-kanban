@@ -2,7 +2,7 @@ package tests.managers;
 
 import managers.TaskManager;
 import managers.Managers;
-import statuses.Status;
+import utils.Status;
 import tasks.Epic;
 import tasks.Subtask;
 import tasks.Task;

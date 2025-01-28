@@ -1,19 +1,20 @@
 package tasks;
-
-import statuses.Status;
-
+import utils.Status;
+import utils.TypeOfTasks;
 import java.util.Objects;
 
 public class Task {
-    private final String title;
-    private final String description;
-    private int id;
-    private Status status;
+    protected final String title;
+    protected final String description;
+    protected int id;
+    protected Status status;
+    protected TypeOfTasks type;
 
     public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.type = TypeOfTasks.TASK;
     }
 
     public Task(String title, String description, Integer id, Status status) {
@@ -21,6 +22,7 @@ public class Task {
         this.description = description;
         this.id = id;
         this.status = status;
+        this.type = TypeOfTasks.TASK;
     }
 
     public String getTitle() {
@@ -49,6 +51,10 @@ public class Task {
         this.status = status;
     }
 
+    public TypeOfTasks getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,11 +73,15 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Tasks.Task{" +
+        return "Task{" +
                 "id=" + id +
                 ", name='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public String toStringForFile() {
+        return String.format("%s,%s,%s,%s,%s,%s", id, type, title, status, description, "");
     }
 }
