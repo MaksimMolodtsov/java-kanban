@@ -18,7 +18,7 @@ class FileBackedTaskManagerTest {
     @Test
     void loadFromFile() throws IOException {
 
-        File newFile = File.createTempFile("text", ".temp", new File("/Users/Maksim"));
+        File newFile = File.createTempFile("text", ".temp");
 
         FileBackedTaskManager backedTaskManager = new FileBackedTaskManager(newFile);
 
