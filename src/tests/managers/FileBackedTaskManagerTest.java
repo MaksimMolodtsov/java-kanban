@@ -2,7 +2,6 @@ package tests.managers;
 
 import managers.FileBackedTaskManager;
 import managers.TaskManager;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.Epic;
 import tasks.Subtask;
@@ -16,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FileBackedTaskManagerTest {
 
-    @BeforeEach
-    public void beforeEach() throws IOException {
+    @Test
+    void loadFromFile() throws IOException {
 
         File newFile = File.createTempFile("text", ".temp", new File("/Users/Maksim"));
 
@@ -40,12 +39,7 @@ class FileBackedTaskManagerTest {
         Subtask subtask21 = new Subtask("Подзадача №1", "Думать", Status.IN_PROGRESS, epic2.getId());
         backedTaskManager.addSubtask(subtask21);
 
-    }
-
-    @Test
-    void loadFromFile() {
-
-        TaskManager fileBackedManager = FileBackedTaskManager.loadFromFile(new File("/Users/Maksim/text.temp"));
+        TaskManager fileBackedManager = FileBackedTaskManager.loadFromFile(newFile);
 
         assertEquals("Задача №2", fileBackedManager.getTaskById(2).getTitle());
         assertEquals("Эпик №1", fileBackedManager.getEpicById(3).getTitle());
