@@ -141,7 +141,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         if (taskToArray.length > 5) {
             epicId = taskToArray[5];
         }
-
         try {
             switch (type) {
                 case TASK:
