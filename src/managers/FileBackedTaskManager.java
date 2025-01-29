@@ -98,7 +98,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         save();
     }
 
-    public void save() {
+    private void save() {
         try (Writer fileWriter = new FileWriter(file)) {
             fileWriter.write("id,type,name,status,description,epic\n");
             List<String> allTasks = new ArrayList<>();
@@ -130,10 +130,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    /*private static String toString(Task task) {
-        return String.join(",",String.valueOf(task));
-    }*/
-
     private static Task fromString(String value) {
         String[] taskToArray = value.split(",");
         int id = Integer.parseInt(taskToArray[0]);
@@ -146,17 +142,19 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             epicId = taskToArray[5];
         }
 
-        switch (type) {
-            case TASK:
-                return new Task(title, description, id, status);
-            case EPIC:
-                return new Epic(title, description, status, id);
-            case SUBTASK:
-                assert epicId != null;
-                return new Subtask(title, description, id, status, Integer.parseInt(epicId));
-            default:
-                return null;
+        try {
+            switch (type) {
+                case TASK:
+                    return new Task(title, description, id, status);
+                case EPIC:
+                    return new Epic(title, description, status, id);
+                case SUBTASK:
+                    return new Subtask(title, description, id, status, Integer.parseInt(epicId));
+            }
+        } catch (NullPointerException e) {
+            e.getMessage();
         }
+        return null;
     }
 
     public static FileBackedTaskManager loadFromFile(File file) {
@@ -173,7 +171,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     continue;
                 }
                 Task task = fromString(string);
-                assert task != null;
                 if (task.getType().equals(TypeOfTasks.EPIC)) {
                     manager.epics.put(task.getId(), (Epic) task);
                 } else if (task.getType().equals(TypeOfTasks.SUBTASK)) {
