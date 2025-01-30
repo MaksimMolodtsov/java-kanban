@@ -140,7 +140,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         if (taskToArray.length > 5) {
             epicId = taskToArray[5];
         }
-        try {
+
             switch (type) {
                 case TASK:
                     return new Task(title, description, id, status);
@@ -148,14 +148,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     return new Epic(title, description, status, id);
                 case SUBTASK:
                     return new Subtask(title, description, id, status, Integer.parseInt(epicId));
+                default:
+                    throw new IllegalArgumentException("Нулевой тип.");
             }
-        } catch (NullPointerException e) {
-            e.getMessage();
         }
-        return null;
-    }
 
-    public static FileBackedTaskManager loadFromFile(File file) {
+        public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager manager = new FileBackedTaskManager(file);
 
         try (BufferedReader reader = new BufferedReader(new FileReader((file)))) {
