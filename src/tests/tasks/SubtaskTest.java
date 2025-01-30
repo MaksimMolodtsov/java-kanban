@@ -1,6 +1,6 @@
 package tests.tasks;
 
-import statuses.Status;
+import utils.Status;
 import tasks.Epic;
 import tasks.Subtask;
 import org.junit.jupiter.api.Assertions;
