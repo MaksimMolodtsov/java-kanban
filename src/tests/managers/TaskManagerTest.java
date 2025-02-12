@@ -149,8 +149,8 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         final Task task2 = new Task("Задача №2", "Описание 2", 2, Status.IN_PROGRESS,
                 Duration.ofHours(1), LocalDateTime.of(2025,1,10,10,10));
         taskManager.addTask(task1);
-        assertThrows(ManagerCrossingTimeException.class, () -> {
-            taskManager.addTask(task2);} , "Наложение по времени с другой задачей.");
+        assertThrows(ManagerCrossingTimeException.class, () -> taskManager.addTask(task2),
+                "Наложение по времени с другой задачей.");
     }
 
 }
