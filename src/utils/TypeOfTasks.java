@@ -1,7 +1,5 @@
 package utils;
 
 public enum TypeOfTasks {
-    TASK,
-    EPIC,
-    SUBTASK
+    TASK, EPIC, SUBTASK
 }

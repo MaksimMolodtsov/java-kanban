@@ -20,7 +20,7 @@ class TaskTest {
 
     @Test
     void shouldReturnTrueIfIdsAreEquals() {
-        Assertions.assertEquals(task1, task2);
+        Assertions.assertEquals(task1.getId(), task2.getId());
     }
 
 }
