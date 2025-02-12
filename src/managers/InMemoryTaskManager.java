@@ -15,7 +15,7 @@ public class InMemoryTaskManager implements TaskManager {
     protected final Map<Integer, Epic> epics = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
     protected Comparator<Task> comparator = (t1, t2) -> {
-        if(t1.getStartTime().isBefore(t2.getStartTime())) {
+        if (t1.getStartTime().isBefore(t2.getStartTime())) {
             return -1;
         } else if (t1.getStartTime().isAfter(t2.getStartTime())) {
             return 1;
@@ -35,7 +35,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteTasks() {
-        for(int id: tasks.keySet()) {
+        for (int id: tasks.keySet()) {
             historyManager.remove(id);
             prioritizedTasks.remove(tasks.get(id));
         }
@@ -52,7 +52,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Task addTask(Task task) {
         task.setId(nextId++);
         tasks.put(task.getId(), task);
-        if(crossingInTime(task)) {
+        if (crossingInTime(task)) {
             throw new ManagerCrossingTimeException("Наложение по времени с другой задачей.");
         } else {
             prioritizedTasks.add(task);
@@ -66,7 +66,7 @@ public class InMemoryTaskManager implements TaskManager {
             Task oldTask = tasks.get(task.getId());
             prioritizedTasks.remove(oldTask);
             tasks.put(task.getId(), task);
-            if(crossingInTime(task)) {
+            if (crossingInTime(task)) {
                 throw new ManagerCrossingTimeException("Наложение по времени с другой задачей.");
             } else {
                 prioritizedTasks.add(task);
@@ -92,10 +92,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteEpics() {
-        for(int id: epics.keySet()) {
+        for (int id: epics.keySet()) {
             historyManager.remove(id);
         }
-        for(int id: subtasks.keySet()) {
+        for (int id: subtasks.keySet()) {
             historyManager.remove(id);
             prioritizedTasks.remove(subtasks.get(id));
         }
@@ -124,7 +124,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (epics.containsKey(epic.getId())) {
         Epic oldEpic = epics.get(epic.getId());
         List<Integer> oldEpicSubtasksIds = oldEpic.getSubtasksIds();
-        for(Integer id: oldEpicSubtasksIds) {
+        for (Integer id: oldEpicSubtasksIds) {
             epic.setSubtasksIds(id);
         }
         updateStatus(epic);
@@ -178,7 +178,7 @@ public class InMemoryTaskManager implements TaskManager {
         Epic epic = epics.get(subtask.getEpicId());
         epic.setSubtasksIds(subtask.getId());
         subtasks.put(subtask.getId(), subtask);
-        if(crossingInTime(subtask)) {
+        if (crossingInTime(subtask)) {
             throw new ManagerCrossingTimeException("Наложение по времени с другой задачей.");
         } else {
             prioritizedTasks.add(subtask);
@@ -195,7 +195,7 @@ public class InMemoryTaskManager implements TaskManager {
             subtask.setEpicId(oldSubtask.getEpicId());
             subtasks.put(subtask.getId(), subtask);
             prioritizedTasks.remove(oldSubtask);
-            if(crossingInTime(subtask)) {
+            if (crossingInTime(subtask)) {
                 throw new ManagerCrossingTimeException("Наложение по времени с другой задачей.");
             } else {
                 prioritizedTasks.add(subtask);
@@ -271,15 +271,15 @@ public class InMemoryTaskManager implements TaskManager {
         LocalDateTime startTimeOfEpic = LocalDateTime.MAX;
         LocalDateTime endTimeOfEpic = LocalDateTime.MIN;
 
-        if(subtasks.isEmpty()) {
+        if (subtasks.isEmpty()) {
             epic.setStartTime(LocalDateTime.MIN);
             epic.setEndTime(LocalDateTime.MAX);
         } else {
-            for(Subtask subtask: subtasks) {
-                if(subtask.getStartTime().isBefore(startTimeOfEpic)) {
+            for (Subtask subtask: subtasks) {
+                if (subtask.getStartTime().isBefore(startTimeOfEpic)) {
                     startTimeOfEpic = subtask.getStartTime();
                 }
-                if(subtask.getEndTime().isAfter(endTimeOfEpic)) {
+                if (subtask.getEndTime().isAfter(endTimeOfEpic)) {
                     endTimeOfEpic = subtask.getEndTime();
                 }
             }
