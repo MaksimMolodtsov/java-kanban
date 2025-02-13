@@ -122,8 +122,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Epic updateEpic(Epic epic) {
         if (epics.containsKey(epic.getId())) {
-            Epic oldEpic = epics.get(epic.getId());
-            setSubtasksIdsOfOldEpic(epic, oldEpic);
+            epic.setSubtasksIds(epics.get(epic.getId()).getSubtasksIds());
             updateStatus(epic);
             epics.put(epic.getId(), epic);
         }
@@ -305,13 +304,6 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
         return false;
-    }
-
-    private void setSubtasksIdsOfOldEpic(Epic newEpic, Epic oldEpic) {
-        List<Integer> oldEpicSubtasksIds = oldEpic.getSubtasksIds();
-        for (Integer id : oldEpicSubtasksIds) {
-            newEpic.setSubtasksIds(id);
-        }
     }
 
 }
