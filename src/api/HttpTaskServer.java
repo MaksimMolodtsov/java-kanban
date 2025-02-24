@@ -2,7 +2,6 @@ package api;
 
 import api.handlers.*;
 import com.sun.net.httpserver.HttpServer;
-import managers.InMemoryTaskManager;
 import managers.Managers;
 import managers.TaskManager;
 import tasks.Epic;
@@ -20,11 +19,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class HttpTaskServer {
-    private static final int PORT = 8080;
+    //private static final int PORT = 8080;
     private final HttpServer httpServer;
 
     public HttpTaskServer(TaskManager taskManager) throws IOException {
-        httpServer = HttpServer.create(new InetSocketAddress(PORT), 0);
+        httpServer = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
 
         httpServer.createContext("/tasks", new TasksHandler(taskManager));
         httpServer.createContext("/subtasks", new SubtasksHandler(taskManager));
@@ -45,8 +44,6 @@ public class HttpTaskServer {
         System.out.println("Поехали!");
 
         TaskManager manager = Managers.getDefault();
-
-
 
         //File newFile = File.createTempFile("text", ".temp", new File("/Users/Maksim"));
         //FileBackedTaskManager backedTaskManager = new FileBackedTaskManager(newFile);
@@ -120,7 +117,7 @@ public class HttpTaskServer {
 
         HttpTaskServer server = new HttpTaskServer(manager);
         server.start();
-        System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+        System.out.println("HTTP-сервер запущен на " + 8080 + " порту!");
 
         URI uri = URI.create("http://localhost:8080/tasks");
 
