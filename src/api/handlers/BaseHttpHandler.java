@@ -13,8 +13,8 @@ import java.nio.charset.StandardCharsets;
 public class BaseHttpHandler implements HttpHandler {
 
     protected TaskManager taskManager;
-    protected Gson gson = Managers.getGson();
     protected String response;
+    protected Gson gson = Managers.getGson();
 
     public BaseHttpHandler(TaskManager taskManager) {
         this.taskManager = taskManager;

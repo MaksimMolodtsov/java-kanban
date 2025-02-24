@@ -1,6 +1,6 @@
 package managers;
 
-import api.adapters.InstantAdapter;
+import api.adapters.DurationAdapter;
 import api.adapters.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +22,7 @@ public class Managers {
         return new GsonBuilder()
                 .serializeNulls()
                 .setPrettyPrinting()
-                .registerTypeAdapter(Instant.class, new InstantAdapter())
+                .registerTypeAdapter(Instant.class, new DurationAdapter())
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .create();
     }
