@@ -19,7 +19,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class HttpTaskServer {
-    //private static final int PORT = 8080;
+
     private final HttpServer httpServer;
 
     public HttpTaskServer(TaskManager taskManager) throws IOException {
@@ -119,6 +119,8 @@ public class HttpTaskServer {
         server.start();
         System.out.println("HTTP-сервер запущен на " + 8080 + " порту!");
 
+        System.out.println(Managers.getGson().toJson(task1));
+
         URI uri = URI.create("http://localhost:8080/tasks");
 
         HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
@@ -134,7 +136,6 @@ public class HttpTaskServer {
         HttpResponse<String> response = client.send(request, handler);
         System.out.println("Код ответа: " + response.statusCode());
         System.out.println("Тело ответа: " + response.body());
-
     }
 
 }
