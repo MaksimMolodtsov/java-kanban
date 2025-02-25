@@ -25,6 +25,7 @@ public class BaseHttpHandler implements HttpHandler {
         String method = httpExchange.getRequestMethod();
         String[] path = httpExchange.getRequestURI().getPath().split("/");
 
+
         switch (method) {
             case "GET":
                 getHandle(httpExchange, path);
@@ -35,6 +36,7 @@ public class BaseHttpHandler implements HttpHandler {
             default:
                 sendNotFound(httpExchange);
         }
+        httpExchange.close();
     }
 
     protected void getHandle(HttpExchange httpExchange, String[] path) throws IOException {}

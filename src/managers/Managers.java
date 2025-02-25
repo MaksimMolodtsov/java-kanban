@@ -5,7 +5,7 @@ import api.adapters.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.time.Instant;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Managers {
@@ -20,9 +20,9 @@ public class Managers {
 
     public static Gson getGson() {
         return new GsonBuilder()
-                .serializeNulls()
+                //.serializeNulls()
                 .setPrettyPrinting()
-                .registerTypeAdapter(Instant.class, new DurationAdapter())
+                .registerTypeAdapter(Duration.class, new DurationAdapter())
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .create();
     }

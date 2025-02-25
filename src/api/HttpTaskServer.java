@@ -2,6 +2,7 @@ package api;
 
 import api.handlers.*;
 import com.sun.net.httpserver.HttpServer;
+import managers.FileBackedTaskManager;
 import managers.Managers;
 import managers.TaskManager;
 import tasks.Epic;
@@ -9,6 +10,7 @@ import tasks.Subtask;
 import tasks.Task;
 import utils.Status;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -45,8 +47,8 @@ public class HttpTaskServer {
 
         TaskManager manager = Managers.getDefault();
 
-        //File newFile = File.createTempFile("text", ".temp", new File("/Users/Maksim"));
-        //FileBackedTaskManager backedTaskManager = new FileBackedTaskManager(newFile);
+        File newFile = File.createTempFile("text", ".temp", new File("/Users/Maksim"));
+        FileBackedTaskManager backedTaskManager = new FileBackedTaskManager(newFile);
 
         Task task1 = new Task("Задача №1", "Поспать", Status.IN_PROGRESS);
         task1.setStartTime(LocalDateTime.of(2025, 2, 10, 10, 5));
@@ -68,7 +70,7 @@ public class HttpTaskServer {
 
         Subtask subtask12 = new Subtask("Подзадача №2", "Оплата", Status.IN_PROGRESS, epic1.getId());
         subtask12.setStartTime(LocalDateTime.of(2025, 2, 11, 15, 0));
-        subtask12.setDuration(Duration.ofHours(1));
+        subtask12.setDuration(Duration.ofHours(2));
         manager.addSubtask(subtask12);
 
         Epic epic2 = new Epic("Эпик №2", "Подумать о смысле жизни");
@@ -113,29 +115,12 @@ public class HttpTaskServer {
         System.out.println(manager.getHistory());
         System.out.println(manager.getPrioritizedTasks());
 
-        //FileBackedTaskManager fileBackedManager = FileBackedTaskManager.loadFromFile(newFile);
+        FileBackedTaskManager fileBackedManager = FileBackedTaskManager.loadFromFile(newFile);
 
         HttpTaskServer server = new HttpTaskServer(manager);
         server.start();
         System.out.println("HTTP-сервер запущен на " + 8080 + " порту!");
 
-        System.out.println(Managers.getGson().toJson(task1));
-
-        URI uri = URI.create("http://localhost:8080/tasks");
-
-        HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
-        HttpRequest request = requestBuilder
-                .GET()
-                .uri(uri)
-                .version(HttpClient.Version.HTTP_1_1)
-                .header("Accept", "application/json")
-                .build();
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpResponse.BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
-        HttpResponse<String> response = client.send(request, handler);
-        System.out.println("Код ответа: " + response.statusCode());
-        System.out.println("Тело ответа: " + response.body());
     }
 
 }

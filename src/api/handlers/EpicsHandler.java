@@ -57,12 +57,8 @@ public class EpicsHandler extends BaseHttpHandler {
         }
         try {
             Epic epic = gson.fromJson(bodyRequest, Epic.class);
-            if (taskManager.getEpicById(epic.getId()) != null) {
-                sendNotFound(httpExchange);
-            } else {
                 taskManager.addEpic(epic);
                 sendText(httpExchange, "Success", 201);
-            }
         } catch (JsonSyntaxException e) {
             sendNotFound(httpExchange);
         }
