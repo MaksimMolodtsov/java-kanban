@@ -39,11 +39,14 @@ public class BaseHttpHandler implements HttpHandler {
         httpExchange.close();
     }
 
-    protected void getHandle(HttpExchange httpExchange, String[] path) throws IOException {}
+    protected void getHandle(HttpExchange httpExchange, String[] path) throws IOException {
+    }
 
-    protected void postHandle(HttpExchange httpExchange) throws IOException {}
+    protected void postHandle(HttpExchange httpExchange) throws IOException {
+    }
 
-    protected void deleteHandle(HttpExchange httpExchange, String[] path) throws IOException {}
+    protected void deleteHandle(HttpExchange httpExchange, String[] path) throws IOException {
+    }
 
     protected void sendText(HttpExchange httpExchange, String response, int statusCode) throws IOException {
         httpExchange.getResponseHeaders().set("Content-Type", "application/json;charset=utf-8");
