@@ -13,10 +13,6 @@ import utils.Status;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -42,7 +38,7 @@ public class HttpTaskServer {
         httpServer.stop(0);
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         System.out.println("Поехали!");
 
         TaskManager manager = Managers.getDefault();
