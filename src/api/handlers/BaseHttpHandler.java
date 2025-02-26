@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class BaseHttpHandler implements HttpHandler {
+public abstract class BaseHttpHandler implements HttpHandler {
 
     protected TaskManager taskManager;
     protected String response;
@@ -39,8 +39,7 @@ public class BaseHttpHandler implements HttpHandler {
         httpExchange.close();
     }
 
-    protected void getHandle(HttpExchange httpExchange, String[] path) throws IOException {
-    }
+    protected abstract void getHandle(HttpExchange httpExchange, String[] path) throws IOException;
 
     protected void postHandle(HttpExchange httpExchange) throws IOException {
     }
