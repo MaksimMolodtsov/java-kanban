@@ -1,5 +1,13 @@
 package managers;
 
+import api.adapters.DurationAdapter;
+import api.adapters.LocalDateTimeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Managers {
 
     public static TaskManager getDefault() {
@@ -8,6 +16,15 @@ public class Managers {
 
     public static HistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();
+    }
+
+    public static Gson getGson() {
+        return new GsonBuilder()
+                //.serializeNulls()
+                .setPrettyPrinting()
+                .registerTypeAdapter(Duration.class, new DurationAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
     }
 
 }
