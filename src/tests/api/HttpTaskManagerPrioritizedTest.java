@@ -26,20 +26,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HttpTaskManagerPrioritizedTest {
 
-    TaskManager taskManager = new InMemoryTaskManager();
-    HttpTaskServer taskServer = new HttpTaskServer(taskManager);
-    Gson gson = Managers.getGson();
-    Type taskType = new TypeToken<List<Task>>() {
+    private TaskManager taskManager = new InMemoryTaskManager();
+    private HttpTaskServer taskServer;
+    private Gson gson = Managers.getGson();
+    private Type taskType = new TypeToken<List<Task>>() {
     }.getType();
 
-    public HttpTaskManagerPrioritizedTest() throws IOException {
-    }
-
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         taskManager.deleteTasks();
         taskManager.deleteSubtasks();
         taskManager.deleteEpics();
+        taskServer = new HttpTaskServer(taskManager);
         taskServer.start();
     }
 
